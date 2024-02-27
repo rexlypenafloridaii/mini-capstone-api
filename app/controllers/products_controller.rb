@@ -6,6 +6,6 @@ class ProductsController < ApplicationController
 
   def just_one
     @product = Product.first
-    render template: "product/show"
+    render template: "products/show"
   end
 end
