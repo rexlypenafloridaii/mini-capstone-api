@@ -29,4 +29,10 @@ class ProductsController < ApplicationController
     )
     render :show
   end
+
+  def destroy
+    product = Product.find_by(id: params[:id]) #doesn't use @ before the variable because the variable isn't referencing a template
+    product.destroy
+    render json: { message: "Product destroyed successfully!" }
+  end
 end
