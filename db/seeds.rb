@@ -19,3 +19,11 @@ Image.create(product_id: 1, url: "https://m.media-amazon.com/images/I/713xNo4Tn+
 Image.create(product_id: 1, url: "https://static.wikia.nocookie.net/gunplabuilders/images/f/f3/HGUC-Gundam-Ground-Type-box.jpg")
 Image.create(product_id: 2, url: "https://cdn.shopify.com/s/files/1/2786/5582/products/mg-rx-78-gundam-gundam-the-origin-ver-pa.jpg")
 Image.create(product_id: 3, url: "https://cdn11.bigcommerce.com/s-hfx3ll3t77/images/stencil/1280x1280/products/198/833/5__08812.1595427709.jpg")
+
+Category.create(name: "High Grades")
+Category.create(name: "Master Grades")
+Category.create(name: "Perfect Grades")
+
+CategoryProduct.create(category_id: 1, product_id: 1)
+CategoryProduct.create(category_id: 2, product_id: 2)
+CategoryProduct.create(category_id: 3, product_id: 3)

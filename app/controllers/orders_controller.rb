@@ -7,31 +7,15 @@ class OrdersController < ApplicationController
   end
 
   def create
-    # Find product from Product model that has an id that matches params[:product_id]
-    product = Product.find_by(id: params[:product_id])
-    # Get price of that product
-    price = product.price
-    # Calculate subtotal by multiplying price by params[:quantity]
-    calculated_subtotal = price * params[:quantity].to_i
-    # Calculate tax using 0.09 or use the product's tax method
-    calculated_tax = product.tax * params[:quantity].to_i
-    # Calculate the total by adding the subtotal and tax
-    calculated_total = calculated_subtotal + calculated_tax
-
-    if current_user
-      @order = Order.create(
-        user_id: current_user.id,
-        product_id: params[:product_id],
-        quantity: params[:quantity],
-        subtotal: calculated_subtotal,
-        tax: calculated_tax,
-        total: calculated_total,
-      )
-
-      render :show
-    else
-      render json: [], status: :unauthorized
+    @order = Order.create(
+      user_id: current_user.id,
+    )
+    carted_products = current_user.carted_products.where(status: "carted")
+    carted_products.each do |carted_product|
+      carted_product.update(status: "purchased", order_id: @order.id)
     end
+    @order.update_totals
+    render :show
   end
 
   def show

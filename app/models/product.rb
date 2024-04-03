@@ -5,6 +5,11 @@ class Product < ApplicationRecord
   validates :price, numericality: { greater_than: 0 }
   validates :description, length: { in: 1..500 }
 
+  has_many :category_products
+  has_many :categories, through: :category_products
+  has_many :carted_products
+  has_many :orders, through: :carted_products
+
   has_many :images
   # def images
   #   Image.where(product_id: id)
